@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { geolocated } from "react-geolocated";
+import Weather from "./Weather";
+import Info from "./Info";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App = (props) => {
+  return !props.isGeolocationAvailable ? (
+    <Info message="Your browser doesn't support Geolocation. Sorry." />
+  ) : !props.isGeolocationEnabled ? (
+    <Info message="Geolocation is not enabled." />
+  ) : props.coords ? (
+    <Weather
+      latitude={props.coords.latitude}
+      longitude={props.coords.longitude}
+    />
+  ) : (
+    <Info message="Getting Location" />
   );
-}
+};
 
-export default App;
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false,
+  },
+  userDecisionTimeout: 5000,
+})(App);

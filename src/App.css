@@ -1,38 +1,134 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  justify-content: space-between;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.Weather {
+  justify-content: space-between;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1s; /* Firefox < 16 */
+  -ms-animation: fadein 1s; /* Internet Explorer */
+  -o-animation: fadein 1s; /* Opera < 12.1 */
+  animation: fadein 1s;
 }
 
-@keyframes App-logo-spin {
+@keyframes fadein {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
   }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.Top-Container {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.Bottom-Container {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  flex-direction: row;
+  text-align: end;
+}
+
+.Center-Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 4;
+}
+
+.SideText {
+  margin: 2rem;
+  text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  font-size: calc((4vw + 4vh) / 2);
+  line-height: 59px;
+  color: #f2faff;
+}
+
+.Logo {
+  display: flex;
+  height: 5rem;
+  width: 5rem;
+  margin: 1.5rem;
+}
+
+.Info {
+  text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.Temperature {
+  text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: calc((18vw + 18vh) / 2);
+  line-height: 351px;
+}
+
+.Unit {
+  text-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: calc((10vw + 10vh) / 2);
+  line-height: 176px;
+  color: #f2faff;
 }
