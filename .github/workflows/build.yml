@@ -20,6 +20,8 @@ jobs:
           node-version: 12.x
       - run: yarn install
       - run: yarn build
+        env:
+          KEY: ${{ secrets.API_KEY }}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
