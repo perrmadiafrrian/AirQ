@@ -4,16 +4,13 @@ import { geolocated } from "react-geolocated";
 import Weather from "./Weather";
 import Info from "./Info";
 
-const App = (props) => {
-  return !props.isGeolocationAvailable ? (
+const App = ({ isGeolocationAvailable, isGeolocationEnabled, coords }) => {
+  return !isGeolocationAvailable ? (
     <Info message="Your browser doesn't support Geolocation. Sorry." />
-  ) : !props.isGeolocationEnabled ? (
+  ) : !isGeolocationEnabled ? (
     <Info message="Geolocation is not enabled." />
-  ) : props.coords ? (
-    <Weather
-      latitude={props.coords.latitude}
-      longitude={props.coords.longitude}
-    />
+  ) : coords ? (
+    <Weather latitude={coords.latitude} longitude={coords.longitude} />
   ) : (
     <Info message="Getting Location" />
   );
