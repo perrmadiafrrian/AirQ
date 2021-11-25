@@ -1,0 +1,65 @@
+.container {
+  background-color: #000;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top_container,
+.bottom_container {
+  display: flex;
+  flex: 1 1;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.miyg_logo {
+  display: flex;
+  height: 5rem;
+  width: 5rem;
+  margin: 1.5rem;
+}
+
+.side_text {
+  margin: 2rem;
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  font-size: calc(2vw + 2vh);
+  line-height: 59px;
+  color: #f2faff;
+}
+
+.center_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 4 1;
+}
+
+.bottom_container {
+  text-align: end;
+}
+
+.info,
+.temperature {
+  text-shadow: 0 10px 20px rgb(0 0 0 / 25%);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.temperature {
+  font-size: calc(9vw + 9vh);
+  line-height: 351px;
+}
+
+.unit {
+  text-shadow: 0 10px 20px rgb(0 0 0 / 25%);
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: calc(5vw + 5vh);
+  line-height: 176px;
+  color: #f2faff;
+}
