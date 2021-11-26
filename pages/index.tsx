@@ -1,16 +1,14 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import logo from "../public/miyg.png";
 import { useEffect, useState } from "react";
+import WeatherPage from "../components/WeatherPage";
+import InfoPage from "../components/InfoPage";
 
 type Data = {
   lat: number | null;
   lon: number | null;
 };
 
-const Home: NextPage = () => {
+const Index: NextPage = () => {
   const [geolocated, setGeolocated] = useState<Boolean>(false);
   const [geolocation, setGeolocation] = useState<Data>({
     lat: null,
@@ -32,34 +30,14 @@ const Home: NextPage = () => {
 
   if (geolocated)
     return (
-      <div className={styles.container}>
-        <Head>
-          <title>Rookino - AirQ</title>
-          <meta
-            name="description"
-            content="A simple weather app built in NextJS"
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <div className={styles.top_container}>
-          <div className={styles.miyg_logo}>
-            <Image src={logo} alt="miyg" />
-          </div>
-          <span className={styles.side_text}>Colomadu</span>
-        </div>
-        <div className={styles.center_container}>
-          <span className={styles.temperature}>
-            22
-            <span className={styles.unit}>°C</span>
-          </span>
-        </div>
-        <div className={styles.bottom_container}>
-          <span className={styles.side_text}>November, 25th</span>
-          <span className={styles.side_text}>2021</span>
-        </div>
-      </div>
+      <WeatherPage
+        location={"Colomadu"}
+        temperature={"22"}
+        date={"November, 25th"}
+        year={"2021"}
+      />
     );
-  else return <div></div>;
+  else return <InfoPage message="Getting client's information" />;
 };
 
-export default Home;
+export default Index;
