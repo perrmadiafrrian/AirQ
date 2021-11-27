@@ -86,6 +86,7 @@ const Index: NextPage = () => {
   });
   const [location, setLocation] = useState<string>("");
   const [temperature, setTemperature] = useState<number>(0);
+  const [message, setMessage] = useState<string | null>(null);
 
   // Get number ordinal
   const getOrdinal = (n: number): string => {
@@ -151,28 +152,33 @@ const Index: NextPage = () => {
 
   useEffect(() => {
     //Getting weather information
-    if (geolocation.lat !== null && geolocation.lon !== null)
+    if (geolocation.lat !== null && geolocation.lon !== null) {
+      setMessage("Loading temperature data....");
       axios
         .get(`/api/weather?lat=${geolocation.lat}&lon=${geolocation.lon}`)
         .then(({ data }) => {
           const res_data: ResData = data.data;
           setLocation(res_data.name);
           setTemperature(res_data.main.temp - 273.15);
+          setMessage(null);
         })
         .catch((err) => {
-          console.log(err);
+          setMessage(`${err.name} ${err.message}`);
         });
+    }
   }, [geolocation]);
 
   switch (permission) {
     case Permissions.GRANTED:
-      return (
+      return message === null ? (
         <WeatherPage
           location={location}
           temperature={temperature.toFixed(0)}
           date={`${today.month}, ${today.date}`}
           year={today.year}
         />
+      ) : (
+        <InfoPage message={message} />
       );
     case Permissions.PROMPT:
       return <InfoPage message="Getting client's information" />;
