@@ -85,7 +85,7 @@ const Index: NextPage = () => {
     month: null,
   });
   const [location, setLocation] = useState<string>("");
-  const [temperature, setTemperature] = useState<string | number>("");
+  const [temperature, setTemperature] = useState<number>(0);
 
   // Get number ordinal
   const getOrdinal = (n: number): string => {
@@ -157,7 +157,7 @@ const Index: NextPage = () => {
         .then(({ data }) => {
           const res_data: ResData = data.data;
           setLocation(res_data.name);
-          setTemperature(res_data.main.temp);
+          setTemperature(res_data.main.temp - 273.15);
         })
         .catch((err) => {
           console.log(err);
@@ -169,7 +169,7 @@ const Index: NextPage = () => {
       return (
         <WeatherPage
           location={location}
-          temperature={`${temperature}`}
+          temperature={temperature.toFixed(0)}
           date={`${today.month}, ${today.date}`}
           year={today.year}
         />
