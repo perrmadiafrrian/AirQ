@@ -8,7 +8,7 @@ type PageProps = {
   location?: string;
   temperature?: string;
   date?: string;
-  year?: string;
+  year?: string | number | null;
 };
 
 const WeatherPage: FunctionComponent<PageProps> = ({

@@ -8,11 +8,32 @@ type Data = {
   lon: number | null;
 };
 
+type Today = {
+  date: string | null;
+  year: number | null;
+  month: string | null;
+};
+
 enum Permissions {
   GRANTED = "granted",
   DENIED = "denied",
   PROMPT = "prompt",
 }
+
+const months: string[] = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 const Index: NextPage = () => {
   const [permission, setPermission] = useState<Permissions>(Permissions.PROMPT);
@@ -20,8 +41,28 @@ const Index: NextPage = () => {
     lat: null,
     lon: null,
   });
+  const [today, setToday] = useState<Today>({
+    date: null,
+    year: null,
+    month: null,
+  });
 
-  const checkResult = (permission_state: string) => {
+  // Get number ordinal
+  const getOrdinal = (n: number): string => {
+    switch (n % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  // Check permission result
+  const checkResult = (permission_state: string): void => {
     switch (permission_state) {
       case Permissions.PROMPT:
         setPermission(Permissions.PROMPT);
@@ -37,7 +78,7 @@ const Index: NextPage = () => {
   };
 
   useEffect(() => {
-    //Getting permissions
+    // Getting permissions
     navigator.permissions
       .query({ name: "geolocation" })
       .then(function (result) {
@@ -49,7 +90,7 @@ const Index: NextPage = () => {
         };
       });
 
-    //Getting geolocation of client's browser
+    // Getting geolocation of client's browser
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((data: GeolocationPosition) => {
         setGeolocation({
@@ -58,7 +99,19 @@ const Index: NextPage = () => {
         });
       });
     }
+
+    // Set date
+    const d = new Date();
+    setToday({
+      date: d.getDate() + getOrdinal(d.getDate()),
+      year: d.getFullYear(),
+      month: months[d.getMonth()],
+    });
   }, []);
+
+  useEffect(() => {
+    //Getting weather information
+  }, [geolocation]);
 
   switch (permission) {
     case Permissions.GRANTED:
@@ -66,8 +119,8 @@ const Index: NextPage = () => {
         <WeatherPage
           location={"Colomadu"}
           temperature={"22"}
-          date={"November, 25th"}
-          year={"2021"}
+          date={`${today.month}, ${today.date}`}
+          year={today.year}
         />
       );
     case Permissions.PROMPT:
